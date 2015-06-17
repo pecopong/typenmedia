@@ -22,7 +22,7 @@ Movie theMov;
 void setup() {
   size(1024, 768);
   setLayout(new GridLayout(1, 1));
-  frameRate(1);
+  //frameRate(1);
   maxSketchNum = 17;
   sketchNow = 0;
   reset = false;
