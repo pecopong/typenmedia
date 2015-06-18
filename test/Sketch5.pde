@@ -11,10 +11,13 @@ class Sketch5 extends EmbeddedSketch {
   float t=0;
   float g=0;
   PImage img;
+  PImage uiImgLeft, uiImgRight;
   float f=1;
   void setup() {
     size(1024, 768, P3D);
     img = loadImage("1570.png");
+    uiImgLeft = loadImage("uiLeft.png");
+    uiImgRight = loadImage("uiRight.png");
   }
 
   void draw() {
@@ -73,9 +76,9 @@ class Sketch5 extends EmbeddedSketch {
 
     x+=f;
     g++;
-    tint(255,255);
+    tint(255, 255);
     image(img, t, 0);
-    
+
 
     if (g>1000
       ) {

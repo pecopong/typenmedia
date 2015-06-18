@@ -6,7 +6,7 @@ import ddf.minim.*;
 import oscP5.*;
 import processing.video.*;
 
-boolean ready = true;
+boolean ready = false;
 boolean mouseOnL = false;
 boolean mouseOnR = false;
 boolean removeadd = false;
@@ -20,8 +20,6 @@ void setup() {
   size(1024, 768);
   setLayout(new GridLayout(1, 1));
   frameRate(1);
-  ready = false;
-
   theMov = new Movie(this, "filling_water.mp4");
   theMov.play(); // plays the movie once
 
@@ -56,10 +54,12 @@ void draw() {
   if (ready) {
     for (EmbeddedSketch sketch : sketches) {
       sketch.setIsActive(false);
+      println(sketch);
     }
     sketches[sketchNow%18].setIsActive(true);
     removeAll();
-    setup();
+    add(new SketchPanel(this, sketches[sketchNow%18]));
+    ready = false;
   }
 }
 
