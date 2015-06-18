@@ -1,9 +1,26 @@
 class Sketch10 extends EmbeddedSketch {
-  int mBgCol = 0;
-  int mBgColInv = 255;
-  int mOpaL = 50;
-  int mOpaR = 50;
-  
+  void pageShift(int x, int y) {
+    if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
+      if(mousePressed) {
+        slideShow.setCurrentSlide(x);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50); 
+    }
+    image(btn_LB, 0, 264);
+    if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
+      if(mousePressed) {
+        slideShow.setCurrentSlide(y);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_RB, 964, 264);
+    tint(255, 255);
+  }
+
   PImage img;
 
   void setup() {
@@ -49,7 +66,7 @@ class Sketch10 extends EmbeddedSketch {
         b = 0;
       }
     }
-    masterUI();
+    pageShift(10, 12);
   }
 
   float a;
@@ -284,36 +301,6 @@ class Sketch10 extends EmbeddedSketch {
     line(758, 391, 767, 521);
     line(792, 462, 767, 473);
     line(789, 444, 763, 455);
-  }
-  
-  void masterUI() {
-    noStroke();
-    smooth();
-    blendMode(NORMAL);
-    fill(mBgColInv, mOpaL);
-    ellipseMode(CENTER);
-    ellipse(-90, 384, 300, 300);
-    fill(mBgColInv, mOpaR);
-    ellipse(1114, 384, 300, 300);
-    strokeWeight(3);
-    stroke(#67D7E8, 255);
-    line(10, 384, 30, 364);
-    line(10, 384, 30, 404);
-    line(1014, 384, 994, 364);
-    line(1014, 384, 994, 404);
-
-    if (mouseY < 506 && mouseY > 268) {
-      if (mouseX < 60) { // left click (previous sketch)
-        mOpaL = 100;
-        if (mousePressed) pageChan(0);
-      } else if (mouseX > 964) { //right click (next sketch)
-        mOpaR = 100;
-        if (mousePressed) pageChan(1);
-      } else {
-        mOpaL = 50;
-        mOpaR = 50;
-      }
-    }
   }
 }
 

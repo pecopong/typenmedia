@@ -1,8 +1,28 @@
 class Sketch5 extends EmbeddedSketch {
-  int mBgCol = 0;
-  int mBgColInv = 255;
-  int mOpaL = 100;
-  int mOpaR = 100;
+  void pageShift(int x, int y) {
+    pushMatrix();
+    scale(0.603);
+    if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
+      if (mousePressed) {
+        slideShow.setCurrentSlide(x);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_LW, 338, 522);
+    if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
+      if (mousePressed) {
+        slideShow.setCurrentSlide(y);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_RW, 1300, 522);
+    tint(255, 255);
+    popMatrix();
+  }
 
   float x;
   float a=1;
@@ -16,8 +36,6 @@ class Sketch5 extends EmbeddedSketch {
   void setup() {
     size(1024, 768, P3D);
     img = loadImage("1570.png");
-    uiImgLeft = loadImage("uiLeft.png");
-    uiImgRight = loadImage("uiRight.png");
   }
 
   void draw() {
@@ -90,7 +108,7 @@ class Sketch5 extends EmbeddedSketch {
     if (g<1000) {
       t=400;
     }
-    masterUI();
+    pageShift(5, 7);
   }
 
 
@@ -1188,41 +1206,6 @@ class Sketch5 extends EmbeddedSketch {
       bezierVertex(495, 450, 505, 426, 505, 400);
       bezierVertex(505, 373, 495, 349, 479, 330);
       endShape();
-    }
-  }
-
-  void masterUI() {
-    noStroke();
-    smooth();
-    blendMode(NORMAL);
-    fill(mBgColInv, mOpaL);
-    ellipseMode(CENTER);
-    ellipse(-90, 384, 300, 300);
-    fill(mBgColInv, mOpaR);
-    ellipse(1114, 384, 300, 300);
-    strokeWeight(3);
-    stroke(mBgCol, 255);
-    line(10, 384, 30, 364);
-    line(10, 384, 30, 404);
-    line(1014, 384, 994, 364);
-    line(1014, 384, 994, 404);
-    scale(0.603);
-    tint(255, mOpaL);
-    image(uiImgLeft, 338, 522);
-    tint(255, mOpaR);
-    image(uiImgRight, 1300, 522);
-
-    if (mouseY < 506 && mouseY > 268) {
-      if (mouseX < 60) { // left click (previous sketch)
-        mOpaL = 100;
-        if (mousePressed) pageChan(0);
-      } else if (mouseX > 964) { //right click (next sketch)
-        mOpaR = 100;
-        if (mousePressed) pageChan(1);
-      } else {
-        mOpaL = 50;
-        mOpaR = 50;
-      }
     }
   }
 }

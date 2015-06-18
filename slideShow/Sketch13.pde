@@ -1,14 +1,29 @@
 class Sketch13 extends EmbeddedSketch {
-
-  int mBgCol = 0;
-  int mBgColInv = 255;
-  int mOpaL = 50;
-  int mOpaR = 50;
+  void pageShift(int x, int y) {
+    if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
+      if (mousePressed) {
+        slideShow.setCurrentSlide(x);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_LW, 0, 264);
+    if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
+      if (mousePressed) {
+        slideShow.setCurrentSlide(y);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_RW, 964, 264);
+    tint(255, 255);
+  }
 
   PFont myFont;//한국어
   float opacity;
-
-
+  Movie theMov;
 
   void setup() {
 
@@ -16,6 +31,9 @@ class Sketch13 extends EmbeddedSketch {
     size(1024, 768);
     ellipseMode(CENTER);
     opacity = 255;
+
+    theMov = new Movie(this, "filling_water.mp4");
+    theMov.play();
   }
 
   void draw() {
@@ -84,10 +102,8 @@ class Sketch13 extends EmbeddedSketch {
     }
 
     popMatrix();
-    masterUI();
+    pageShift(13, 15);
   }
-
-
 
   void mouseClicked() {
     frameCount =  0;
@@ -855,34 +871,9 @@ class Sketch13 extends EmbeddedSketch {
     fill(255, 54, 131);
     rect(950, 450, 50, 80);
   }
-  void masterUI() {
-    noStroke();
-    smooth();
-    blendMode(NORMAL);
-    fill(mBgColInv, mOpaL);
-    ellipseMode(CENTER);
-    ellipse(-90, 384, 300, 300);
-    fill(mBgColInv, mOpaR);
-    ellipse(1114, 384, 300, 300);
-    strokeWeight(3);
-    stroke(0, 255);
-    line(10, 384, 30, 364);
-    line(10, 384, 30, 404);
-    line(1014, 384, 994, 364);
-    line(1014, 384, 994, 404);
+}
 
-    if (mouseY < 506 && mouseY > 268) {
-      if (mouseX < 60) { // left click (previous sketch)
-        mOpaL = 100;
-        if (mousePressed) pageChan(0);
-      } else if (mouseX > 964) { //right click (next sketch)
-        mOpaR = 100;
-        if (mousePressed) pageChan(1);
-      } else {
-        mOpaL = 50;
-        mOpaR = 50;
-      }
-    }
-  }
+void movieEvent(Movie m) {
+  m.read();
 }
 

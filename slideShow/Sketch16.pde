@@ -1,8 +1,26 @@
 class Sketch16 extends EmbeddedSketch {
-  int mBgCol = 240;
-  int mBgColInv = 0;
-  int mOpaL = 50;
-  int mOpaR = 50;
+
+  void pageShift(int x, int y) {
+    if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
+      if (mousePressed) {
+        slideShow.setCurrentSlide(x);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_LB, 0, 264);
+    if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
+      if (mousePressed) {
+        slideShow.setCurrentSlide(y);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_RB, 964, 264);
+    tint(255, 255);
+  }
 
   OscP5 oscP5;
 
@@ -159,7 +177,7 @@ class Sketch16 extends EmbeddedSketch {
 
     emotionDetect();
     popMatrix();
-    masterUI();
+    pageShift(16, 18);
   }
 
   public void emotionDetect() {
@@ -260,38 +278,6 @@ class Sketch16 extends EmbeddedSketch {
   void oscEvent(OscMessage m) {
     if (m.isPlugged() == false) {
       //    println("UNPLUGGED: " + m);
-    }
-  }
-  void masterUIdraw() {
-    noStroke();
-    smooth();
-    blendMode(NORMAL);
-    fill(mBgColInv, mOpaL);
-    ellipseMode(CENTER);
-    ellipse(-90, 384, 300, 300);
-    fill(mBgColInv, mOpaR);
-    ellipse(1114, 384, 300, 300);
-    strokeWeight(3);
-    stroke(mBgCol, 255);
-    line(10, 384, 30, 364);
-    line(10, 384, 30, 404);
-    line(1014, 384, 994, 364);
-    line(1014, 384, 994, 404);
-  }
-
-  void masterUI() {
-    masterUIdraw();
-   if (mouseY < 506 && mouseY > 268) {
-      if (mouseX < 60) { // left click (previous sketch)
-        mOpaL = 100;
-        if (mousePressed) pageChan(0);
-      } else if (mouseX > 964) { //right click (next sketch)
-        mOpaR = 100;
-        if (mousePressed) pageChan(1);
-      } else {
-        mOpaL = 50;
-        mOpaR = 50;
-      }
     }
   }
 }

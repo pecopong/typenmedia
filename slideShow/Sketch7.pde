@@ -1,8 +1,25 @@
 class Sketch7 extends EmbeddedSketch {
-  int mBgCol = 0;
-  int mBgColInv = 255;
-  int mOpaL = 50;
-  int mOpaR = 50;
+  void pageShift(int x, int y) {
+    if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
+      if (mousePressed) {
+        slideShow.setCurrentSlide(x);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_LW, 0, 264);
+    if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
+      if (mousePressed) {
+        slideShow.setCurrentSlide(y);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_RW, 964, 264);
+    tint(255, 255);
+  }
 
   /* park chaeryun 2013573
    start = space
@@ -42,7 +59,6 @@ class Sketch7 extends EmbeddedSketch {
     for (int i = 0; i < movers.length; i++) {
       movers[i] = new Mover(img, random(0.1, 1.2), random(width), random(height));
     }
-    masterUIdraw();
   }// setup
 
 
@@ -87,7 +103,10 @@ class Sketch7 extends EmbeddedSketch {
     String s2 = "START = SPACE ";
     text(s2, width/2 - 62, 720);
     popMatrix();
-    masterUI();
+    fill(0);
+    rect(0, 0, 61, 768);
+    rect(963, 0, 61, 768);
+    pageShift(7, 9);
   }//draw
 
   void keyPressed() {
@@ -209,36 +228,5 @@ class Sketch7 extends EmbeddedSketch {
       }
     }
   }//class end
-  void masterUIdraw() {
-    noStroke();
-    smooth();
-    blendMode(NORMAL);
-    fill(mBgColInv, mOpaL);
-    ellipseMode(CENTER);
-    ellipse(-90, 384, 300, 300);
-    fill(mBgColInv, mOpaR);
-    ellipse(1114, 384, 300, 300);
-    strokeWeight(3);
-    stroke(mBgCol, 255);
-    line(10, 384, 30, 364);
-    line(10, 384, 30, 404);
-    line(1014, 384, 994, 364);
-    line(1014, 384, 994, 404);
-  }
-
-  void masterUI() {
-    if (mouseY < 506 && mouseY > 268) {
-      if (mouseX < 60) { // left click (previous sketch)
-        mOpaL = 100;
-        if (mousePressed) pageChan(0);
-      } else if (mouseX > 964) { //right click (next sketch)
-        mOpaR = 100;
-        if (mousePressed) pageChan(1);
-      } else {
-        mOpaL = 50;
-        mOpaR = 50;
-      }
-    }
-  }
 }
 

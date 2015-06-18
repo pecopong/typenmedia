@@ -1,9 +1,27 @@
 class Sketch1 extends EmbeddedSketch {
-  int mBgCol = 255;
-  int mBgColInv = 0;
-  int mOpaL = 50;
-  int mOpaR = 50;
 
+  void pageShift(int x, int y) {
+    if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
+      if(mousePressed) {
+        slideShow.setCurrentSlide(x);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50); 
+    }
+    image(btn_LB, 0, 264);
+    if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
+      if(mousePressed) {
+        slideShow.setCurrentSlide(y);
+      }
+      tint(255, 100);
+    } else {
+      tint(255, 50);
+    }
+    image(btn_RB, 964, 264);
+    tint(255, 255);
+  }
+  
   int rect1X, rect2X, rect3X, rectY;
   int rectSize = 100;
   boolean rect1Over = false;
@@ -35,8 +53,6 @@ class Sketch1 extends EmbeddedSketch {
     line(160, 380, 350, 380);
     popMatrix();
     img = loadImage("text.png");
-
-    masterUIdraw();
   }
 
   void draw() {
@@ -64,13 +80,19 @@ class Sketch1 extends EmbeddedSketch {
     if (rect3Over) {
       greymold();
     }
-    masterUI();
+    
+    noStroke();
+    fill(255);
+    rect(0, 0, 100, 768);
+    fill(255);
+    rect(924, 0, 100, 768);
+    pageShift(1, 3);
+    stroke(0);
   }
   void keyPressed() {
     limit=0;
     i=0;
     background(255);
-    masterUIdraw();
   }
 
   void update(int x, int y) {
@@ -372,36 +394,7 @@ class Sketch1 extends EmbeddedSketch {
     endShape();
     popMatrix();
 
-    masterUI();
   }
 
-  void masterUI() {
-    if (mouseY < 506 && mouseY > 268) {
-      if (mouseX < 60) { // left click (previous sketch)
-        mOpaL = 100;
-        if (mousePressed) pageChan(0);
-      } else if (mouseX > 964) { //right click (next sketch)
-        mOpaR = 100;
-        if (mousePressed) pageChan(1);
-      } else {
-        mOpaL = 50;
-        mOpaR = 50;
-      }
-    }
-  }
-
-  void masterUIdraw() {
-    noStroke();
-    fill(mBgColInv, mOpaL);
-    ellipse(-90, 384, 300, 300);
-    fill(mBgColInv, mOpaR);
-    ellipse(1114, 384, 300, 300);
-    strokeWeight(3);
-    stroke(mBgCol);
-    line(10, 384, 30, 364);
-    line(10, 384, 30, 404);
-    line(1014, 384, 994, 364);
-    line(1014, 384, 994, 404);
-  }
 }
 
