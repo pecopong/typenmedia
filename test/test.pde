@@ -6,15 +6,12 @@ import ddf.minim.*;
 import oscP5.*;
 import processing.video.*;
 
-boolean nextAvailable = true;
+boolean ready = true;
 boolean mouseOnL = false;
 boolean mouseOnR = false;
-boolean reset;
 boolean removeadd = false;
 PImage uiImgLeft, uiImgRight;
-
-int maxSketchNum;
-int sketchNow;
+int sketchNow = 0;
 
 EmbeddedSketch[] sketches;
 Movie theMov;
@@ -23,9 +20,7 @@ void setup() {
   size(1024, 768);
   setLayout(new GridLayout(1, 1));
   frameRate(1);
-  maxSketchNum = 17;
-  sketchNow = 0;
-  reset = false;
+  ready = false;
 
   theMov = new Movie(this, "filling_water.mp4");
   theMov.play(); // plays the movie once
@@ -33,7 +28,7 @@ void setup() {
   uiImgLeft = loadImage("uiLeft.png");
   uiImgRight = loadImage("uiRight.png");
 
-  sketches = new EmbeddedSketch[maxSketchNum+1];
+  sketches = new EmbeddedSketch[18];
   sketches[0] = new Sketch0(); //김유진
   sketches[1] = new Sketch1(); //김진영
   sketches[2] = new Sketch2(); //김휘균
@@ -53,27 +48,34 @@ void setup() {
   sketches[16] = new Sketch16(); //정신재
   sketches[17] = new Sketch17(); //황선아
 
-  sketches[sketchNow].setIsActive(true);
-  add(new SketchPanel(this, sketches[sketchNow]));
+  sketches[sketchNow%18].setIsActive(true);
+  add(new SketchPanel(this, sketches[sketchNow%18]));
 }
 
 void draw() {
-  if (reset) {
-    setup();
-  }
-  if (!nextAvailable) {
+  if (ready) {
     for (EmbeddedSketch sketch : sketches) {
       sketch.setIsActive(false);
     }
+    sketches[sketchNow%18].setIsActive(true);
     removeAll();
-    sketches[sketchNow].setIsActive(true);
-    add(new SketchPanel(this, sketches[sketchNow]));
-    nextAvailable = true;
+    setup();
   }
-  println(sketchNow);
 }
 
 void movieEvent(Movie m) {
   m.read();
+}
+
+void pageChan(int dir) { // page change
+  if (!ready) {
+    if (dir == 1) { // right button click
+      sketchNow ++;
+    } else if (dir == 0) {
+      sketchNow --;
+    }
+    ready = true;
+    println(sketchNow);
+  }
 }
 

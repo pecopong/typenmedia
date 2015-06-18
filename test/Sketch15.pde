@@ -1013,34 +1013,16 @@ class Sketch15 extends EmbeddedSketch {
 
   void masterUI() {
     masterUIdraw();
-    if (nextAvailable) {
-      if (mouseY < 506 && mouseY > 268) {
-        if (mouseX < 60) { // left click (previous sketch)
-          mOpaL = 100;
-          if (mousePressed) {
-            if (sketchNow > 0) {
-              sketchNow --;
-              nextAvailable = false;
-            } else {
-              sketchNow = maxSketchNum;
-              nextAvailable = false;
-            }
-          }
-        } else if (mouseX > 964) { //right click (next sketch)
-          mOpaR = 100;
-          if (mousePressed) {
-            if (sketchNow < maxSketchNum) {
-              sketchNow ++;
-              nextAvailable = false;
-            } else {
-              sketchNow = 0;
-              nextAvailable = false;
-            }
-          }
-        } else {
-          mOpaL = 50;
-          mOpaR = 50;
-        }
+    if (mouseY < 506 && mouseY > 268) {
+      if (mouseX < 60) { // left click (previous sketch)
+        mOpaL = 100;
+        if (mousePressed) pageChan(0);
+      } else if (mouseX > 964) { //right click (next sketch)
+        mOpaR = 100;
+        if (mousePressed) pageChan(1);
+      } else {
+        mOpaL = 50;
+        mOpaR = 50;
       }
     }
   }
