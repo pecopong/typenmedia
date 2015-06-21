@@ -1,17 +1,34 @@
 class Sketch0 extends EmbeddedSketch {
   
+  void reset() {
+    xx = 0;
+    yy = 0;
+    x = 0;
+    x1 = 0;
+    x2 = 0;
+    vx = 0;
+    vx2 = 0;
+    dt = 0.5;
+    decay = 0.95;
+    y= 0;
+    y1 = 0;
+    vy = 0;
+  }
+
   void pageShift(int x, int y) {
     if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
-      if(mousePressed) {
+      if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(x);
       }
       tint(255, 100);
     } else {
-      tint(255, 50); 
+      tint(255, 50);
     }
     image(btn_LW, 0, 264);
     if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
-      if(mousePressed) {
+      if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(y);
       }
       tint(255, 100);
@@ -585,5 +602,7 @@ class Sketch0 extends EmbeddedSketch {
 
     pageShift(18, 2);
   }
+
+  
 }
 

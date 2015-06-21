@@ -1,7 +1,22 @@
 class Sketch14 extends EmbeddedSketch {
+
+  void reset() {
+    startX= 40; 
+    stopX = 160;
+    startY = 30;
+    stopY = 80; 
+    X = startX; 
+    Y = startY;
+    step = 0.05; 
+    pct = 0.6;
+    i = 0;
+    tf = false;
+  }
+
   void pageShift(int x, int y) {
     if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
       if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(x);
       }
       tint(255, 100);
@@ -11,6 +26,7 @@ class Sketch14 extends EmbeddedSketch {
     image(btn_LW, 0, 264);
     if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
       if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(y);
       }
       tint(255, 100);

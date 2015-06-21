@@ -11,8 +11,6 @@ PImage btn_LW, btn_RW, btn_LB, btn_RB;
 SlideShow slideShow;
 EmbeddedSketch[] sketches;
 
-
-
 void setup()
 {
   size(1024, 768);

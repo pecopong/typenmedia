@@ -1,4 +1,5 @@
 class Sketch13 extends EmbeddedSketch {
+  
   void pageShift(int x, int y) {
     if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
       if (mousePressed) {
@@ -42,6 +43,9 @@ class Sketch13 extends EmbeddedSketch {
     translate(-70, 0);
 
     background(0);
+    if(theMov.available()){
+      theMov.read();
+    }
     image(theMov, 0, 0);
 
 
@@ -108,7 +112,7 @@ class Sketch13 extends EmbeddedSketch {
   void mouseClicked() {
     frameCount =  0;
     theMov.jump(0);
-    setup();
+    theMov.play();
   }
 
 

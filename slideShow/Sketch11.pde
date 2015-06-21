@@ -1,16 +1,23 @@
 class Sketch11 extends EmbeddedSketch {
+
+  void reset() {
+  
+  }
+
   void pageShift(int x, int y) {
     if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
-      if(mousePressed) {
+      if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(x);
       }
       tint(255, 100);
     } else {
-      tint(255, 50); 
+      tint(255, 50);
     }
     image(btn_LW, 0, 264);
     if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
-      if(mousePressed) {
+      if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(y);
       }
       tint(255, 100);
@@ -75,7 +82,7 @@ class Sketch11 extends EmbeddedSketch {
   //for heeot
 
 
-    float x, y;
+  float x, y;
   float expandX, expandY;
   float angle = 0.0;
   float offsetx = width/2, offsety = height/2;

@@ -1,16 +1,32 @@
 class Sketch12 extends EmbeddedSketch {
+
+  void reset() {
+    rectPos = 200;
+    rectSize = 30;
+    edge = 0;
+    a = 0;
+    s = 0;
+    f = 1;
+    ss = "Left Click";
+    sss = "Drag";
+    ssss = "Right Click";
+    sssss = "Space Bar";
+  }
+
   void pageShift(int x, int y) {
     if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
-      if(mousePressed) {
+      if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(x);
       }
       tint(255, 100);
     } else {
-      tint(255, 50); 
+      tint(255, 50);
     }
     image(btn_LW, 0, 264);
     if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
-      if(mousePressed) {
+      if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(y);
       }
       tint(255, 100);

@@ -2,16 +2,16 @@ class Sketch1 extends EmbeddedSketch {
 
   void pageShift(int x, int y) {
     if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
-      if(mousePressed) {
+      if (mousePressed) {
         slideShow.setCurrentSlide(x);
       }
       tint(255, 100);
     } else {
-      tint(255, 50); 
+      tint(255, 50);
     }
     image(btn_LB, 0, 264);
     if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
-      if(mousePressed) {
+      if (mousePressed) {
         slideShow.setCurrentSlide(y);
       }
       tint(255, 100);
@@ -21,7 +21,7 @@ class Sketch1 extends EmbeddedSketch {
     image(btn_RB, 964, 264);
     tint(255, 255);
   }
-  
+
   int rect1X, rect2X, rect3X, rectY;
   int rectSize = 100;
   boolean rect1Over = false;
@@ -80,7 +80,7 @@ class Sketch1 extends EmbeddedSketch {
     if (rect3Over) {
       greymold();
     }
-    
+
     noStroke();
     fill(255);
     rect(0, 0, 100, 768);
@@ -393,8 +393,6 @@ class Sketch1 extends EmbeddedSketch {
     curveVertex(random(160, 350)-limit, 380+limit);
     endShape();
     popMatrix();
-
   }
-
 }
 

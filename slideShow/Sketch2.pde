@@ -1,7 +1,20 @@
 class Sketch2 extends EmbeddedSketch {
+
+  void reset() {
+    jasos = new ArrayList<Jaso>();
+    lines = new ArrayList<Line>();
+    x = margin;
+    y = margin;
+    i = -1;
+    x2 = margin2;
+    y2 = margin2;
+    x3 = 0;
+  }
+
   void pageShift(int x, int y) {
     if (mouseX < 60 && mouseY > 264 && mouseY < 504) {
       if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(x);
       }
       tint(255, 100);
@@ -11,6 +24,7 @@ class Sketch2 extends EmbeddedSketch {
     image(btn_LB, 0, 264);
     if (mouseX > 964 && mouseY > 264 && mouseY < 504) {
       if (mousePressed) {
+        reset();
         slideShow.setCurrentSlide(y);
       }
       tint(255, 100);
